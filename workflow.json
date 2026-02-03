@@ -30,7 +30,8 @@
           "readStatus": "unread"
         },
         "options": {
-          "format": "resolved"
+          "format": "resolved",
+          "receivedAfter": "={{ $now.minus(1, 'days').format('YYYY-MM-DD') }}"
         }
       },
       "id": "imap-node",

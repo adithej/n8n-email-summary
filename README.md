@@ -60,18 +60,19 @@ Access n8n at `http://localhost:5678`.
 3.  Click the "three dots" menu (top right) -> **Import from File**.
 4.  Select `workflow.json` from this folder.
 
-### 5. Finalize Configuration
+### 5. Finalize Configuration (CRITICAL STEP)
 The workflow handles the AI and Telegram parts automatically using the `.env` file variables. However, **Email Credentials** must be set manually in n8n for security:
 
 1.  Double click the **Fetch Unread Emails** node (IMAP).
-2.  Under "Credential for IMAP", select **Create New Credential**.
-3.  Fill in:
-    *   User: `{{ $env.EMAIL_USER }}` (or type your email)
-    *   Password: `{{ $env.EMAIL_PASS }}` (or type your app password)
-    *   Host: `imap.gmail.com`
-    *   Port: `993`
-    *   SSL/TLS: `true`
+2.  Under "Credential for IMAP", it likely says "No credential selected". Click the dropdown and select **Create New Credential**.
+3.  **IMPORTANT**: You must map the environment variables here.
+    *   **User**: Click the "Expression" button (slider icon next to the field) and type: `{{ $env.EMAIL_USER }}`
+    *   **Password**: Click either "Expression" or just paste your App Password directly. If using env var: `{{ $env.EMAIL_PASS }}`
+    *   **Host**: `imap.gmail.com`
+    *   **Port**: `993`
+    *   **SSL/TLS**: Toggle to `true` (top switch)
 4.  Click **Save**.
+5.  **VERIFY**: Back in the node, ensure the new "Your Email Account" credential is now **Selected** in the dropdown. If it's empty, select it!
 
 ## Usage
 - **Test It**: Click **Execute Workflow** at the bottom of the canvas. You should receive a Telegram message with your email summary.
